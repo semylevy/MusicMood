@@ -51,18 +51,20 @@ class users{
   }
 
 	public function addUser($name, $image) {
-		$db = new administradorBD();
+    $db = new administradorBD();
 
-    $sql = "SELECT LAST_INSERT_ID()";
+    $id = 0;
+    $sql = "SELECT MAX(id_users) FROM Users";
     $result = $db->executeQuery($sql);
     while($row = mysqli_fetch_assoc($result)){
-      $id = $row['LAST_INSERT_ID()'];
+      $id = $row['MAX(id_users)'];
     }
+    $id++;
 
     $path = "known_people/$id.png";
     $ruta = config::obtieneRuta().$path;
 
-    $sql = "INSERT INTO Users (name_users, image_users) VALUES('$name', '$ruta')";
+    $sql = "INSERT INTO Users (id_users, name_users, img_users) VALUES('$id', '$name', '$ruta')";
 
     if($db->executeQuery($sql)){
             file_put_contents($path,base64_decode($image));
@@ -79,7 +81,7 @@ class users{
     while($row = mysqli_fetch_assoc($result)){
       $json['id'] = $row['id_users'];
       $json['name'] = $row['name_users'];
-      $json['img'] = $row['image_users'];
+      $json['img'] = $row['img_users'];
       $data[] = $json;
     }
 
