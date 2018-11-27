@@ -3,7 +3,7 @@ import sys
 import json
 import os
 
-known_path = "./known_people/"
+known_path = "./../known_people/"
 
 # Load the data that PHP sent us
 try:
