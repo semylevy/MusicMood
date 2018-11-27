@@ -56,7 +56,7 @@ class users {
 
 	public function getUserSongs($id){
 		$queries = new Queries();
-		$result = $queries->getSongs($id);
+		$result = $queries->getLikedSongs($id);
 		$json = array();
 		while($row = mysqli_fetch_assoc($result)){
 				$json['name'] = $row['name'];
@@ -69,7 +69,7 @@ class users {
 
 	public function getUserPhotos($id) {
 		$queries = new Queries();
-		$result = $queries->getSongs($id);
+		$result = $queries->getPhotos($id);
 		$json = array();
 		while($row = mysqli_fetch_assoc($result)){
 				$json['date'] = $row['date'];
