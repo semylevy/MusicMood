@@ -6,7 +6,7 @@ include_once('../config/db_admin.php');
 # ---------- INSERT functions ---------------
 
 class Queries {
-	private function insertUser($name) {
+	public function insertUser($name) {
 		$db = new administradorBD();
 		$sql = "INSERT INTO fp_User (nameUser) VALUES ('$name');
 						SELECT LAST_INSERT_ID();";
@@ -21,7 +21,7 @@ class Queries {
 		return -1;
 	}
 
-	private function insertPhoto($image_url) {
+	public function insertPhoto($image_url) {
 		$db = new administradorBD();
 		$sql = "INSERT INTO fp_Photo (urlPhoto) VALUES ('$image_url');
 						SELECT LAST_INSERT_ID();";
@@ -36,7 +36,7 @@ class Queries {
 		return -1;
 	}
 
-	private function insertSong($name, $genre, $video) {
+	public function insertSong($name, $genre, $video) {
 		$db = new administradorBD();
 		$sql = "INSERT INTO fp_Song (nameSong, genreSong, videoSong) VALUES ('$name', '$genre', '$video');
 						SELECT LAST_INSERT_ID();";
@@ -51,7 +51,7 @@ class Queries {
 		return -1;
 	}
 
-	private function insertEmotion($name, $emoji) {
+	public function insertEmotion($name, $emoji) {
 		$db = new administradorBD();
 		$sql = "INSERT INTO fp_Emotion (nameEmotion, emojiEmotion) VALUES ('$name', '$emoji');
 						SELECT LAST_INSERT_ID();";
@@ -66,13 +66,13 @@ class Queries {
 		return -1;
 	}
 
-	private function insertIdentity($user_id, $photo_id) {
+	public function insertIdentity($user_id, $photo_id) {
 		$db = new administradorBD();
 		$sql = "INSERT INTO fp_Identity (User_idUser, Photo_idPhoto) VALUES ('$user_id', '$photo_id')";
 		return $db->executeQuery($sql);
 	}
 
-	private function insertLike($user_id, $song_id) {
+	public function insertLike($user_id, $song_id) {
 		$db = new administradorBD();
 		$sql = "INSERT INTO fp_Like (User_idUser, Song_idSong) VALUES ('$user_id', '$song_id')";
 		return $db->executeQuery($sql);
@@ -88,13 +88,13 @@ class Queries {
 
 	# ---------- SELECT functions ---------------
 	
-	private function getUser($id){
+	public function getUser($id){
 		$sql = "SELECT * FROM fp_User WHERE idUser = $id";
 		$db = new administradorBD();
 		return $db->executeQuery($sql);
 	}
 
-	private function getLikedSongs($id){
+	public function getLikedSongs($id){
 		$sql = "SELECT 
     					s.nameSong AS name,
     					s.genreSong AS genre,
@@ -111,7 +111,7 @@ class Queries {
 		return $db->executeQuery($sql);
 	}
 
-	private function getPhotos($id){
+	public function getPhotos($id){
 		$sql = "SELECT 
     					p.datePhoto AS date, p.urlPhoto AS url
 						FROM
