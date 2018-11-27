@@ -4,9 +4,9 @@ include_once('queries.php');
 
 class users {
 	# ---------- User-facing functions ---------------
-
 	public function findUser($image) {
-		$image_id = $this->insertPhoto(NULL);
+		$queries = new Queries();
+		$image_id = $queries->insertPhoto(NULL);
 		$image_path = config::obtieneRuta()."unknown_pictures/$image_id.png";
 		if (updatePhoto($image_id, $image_path)) {
 			file_put_contents($image_path,base64_decode($image));
@@ -26,14 +26,15 @@ class users {
   }
 
 	public function addUser($name, $image) {
-		$user_id = $this->insertUser($name);
+		$queries = new Queries();
+		$user_id = $queries->insertUser($name);
 		if ($user_id != -1) {
 			// TODO Verify that there is face in picture
 			$path = config::obtieneRuta()."known_people/$id.png";
-			$image_id = $this->insertPhoto($path);
+			$image_id = $queries->insertPhoto($path);
 			if ($image_id != -1) {
 				file_put_contents($path,base64_decode($image));
-				if ($this->insertIdentity($user_id, $image_id)) {
+				if ($queries->insertIdentity($user_id, $image_id)) {
 					return $user_id;
 				}
 			}
@@ -42,7 +43,8 @@ class users {
 	}
 	
 	public function getUserInfo($id){
-    $result = $this->getUser($id);
+		$queries = new Queries();
+    $result = $queries->getUser($id);
     $json = array();
     while($row = mysqli_fetch_assoc($result)){
       $json['id'] = $row['idUser'];
@@ -53,7 +55,8 @@ class users {
 }
 
 	public function getUserSongs($id){
-		$result = $this->getSongs($id);
+		$queries = new Queries();
+		$result = $queries->getSongs($id);
 		$json = array();
 		while($row = mysqli_fetch_assoc($result)){
 				$json['name'] = $row['name'];
@@ -65,7 +68,8 @@ class users {
 	}
 
 	public function getUserPhotos($id) {
-		$result = $this->getSongs($id);
+		$queries = new Queries();
+		$result = $queries->getSongs($id);
 		$json = array();
 		while($row = mysqli_fetch_assoc($result)){
 				$json['date'] = $row['date'];
