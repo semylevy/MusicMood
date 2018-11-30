@@ -16,7 +16,7 @@ class Queries {
 				return $row['LAST_INSERT_ID()'];
 			}
 		} else {
-			echo "ERROR inserting User";
+			echo "ERROR inserting User. Query: ".$sql;
 		}
 		return -1;
 	}
