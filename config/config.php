@@ -22,7 +22,7 @@ class config{
   
   public static function obtieneRuta() {
 		// return $path = 'http://localhost/~semylevy/face_recognition/'; /* local */
-		return $path = 'http://ubiquitous.csf.itesm.mx/~pddm-1023530/MusicMood/'; /* Ubiquitous */
+		return $path = 'http://ubiquitous.csf.itesm.mx/~pddm-1023530/MusicMood/php/'; /* Ubiquitous */
   }
 }
 ?>
